@@ -95,7 +95,7 @@ O protótipo de baixa fidelidade contempla, no mínimo, as seguintes histórias:
 
 ### Entrega 02
 
-Os artefatos referentes à Entrega 02 serão organizados nesta seção conforme o avanço do projeto.
+Primeiras tasks + configuração inicial realizadas: https://youtu.be/oImyBj4sZNs
 
 ---
 
