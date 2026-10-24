@@ -28,7 +28,7 @@ O **NeoGuide** é uma solução tecnológica desenvolvida para automatizar e pad
 
 | Link | Acesso |
 | --- | --- |
-| Quadro do projeto | [Trello](https://trello.com/b/kX5TZNAj) |
+| Quadro do projeto | [Trello](https://trello.com/b/9Wjqm9wH/neoguide-sprints) |
 | Protótipo de alta fidelidade | [Abrir protótipo navegável](https://probe-grow-35678234.figma.site) |
 | Histórias de usuário (com BDD) | [Ver seção Histórias de Usuário](#histórias-de-usuário) |
 
@@ -953,7 +953,7 @@ Classificação das histórias por **impacto** (quanto a funcionalidade contribu
 
 <br><br>
 
-[![Visualizar no Trello](https://img.shields.io/badge/VISUALIZAR_NO_TRELLO-0052CC?style=for-the-badge&logo=trello&logoColor=white)](https://trello.com/b/kX5TZNAj)
+[![Visualizar no Trello](https://img.shields.io/badge/VISUALIZAR_NO_TRELLO-0052CC?style=for-the-badge&logo=trello&logoColor=white)](https://trello.com/b/9Wjqm9wH/neoguide-sprints)
 
 </div>
 
