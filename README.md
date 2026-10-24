@@ -56,7 +56,10 @@ O **NeoGuide** é uma solução tecnológica desenvolvida para automatizar e pad
 | Área | Ferramentas e tecnologias |
 | --- | --- |
 | Front-end | Angular |
-| Back-end | Java, Spring Boot |
+| Back-end | Java 21, Spring Boot 3, Spring Data JPA, Spring Security (JWT) |
+| Banco de dados | PostgreSQL 16 |
+| Infraestrutura | Docker, Docker Compose |
+| Chatbot | Python, FastAPI, LangChain, pgvector |
 | Versionamento | Git, GitHub |
 | Design e prototipação | Figma, Figma Make, Canva |
 | Gestão do projeto | Trello |
@@ -99,28 +102,103 @@ Primeiras tasks + configuração inicial realizadas: https://youtu.be/oImyBj4sZN
 
 ---
 
+### Entrega 03
+
+#### Histórias implementadas
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**US02 — Criar novo projeto**
+
+Como um projetista, eu gostaria de criar um projeto informando os dados de identificação da edificação, para que o cálculo de demanda comece organizado e vinculado à minha conta.
+
+*Confirmação*
+- ✅ Dado que a projetista está autenticada, quando envia nome, endereço e tipo de edificação, então o projeto é gravado no banco com status Rascunho e protocolo `PRJ-AAAA-XXXX`.
+- ❌ Dado que falta um campo obrigatório, quando tenta criar, então o projeto não é gravado e o campo pendente é informado.
+
+</td>
+<td width="50%" valign="top">
+
+**US13 — Duplicar projeto existente**
+
+Como um projetista que atende empreendimentos padronizados, eu gostaria de criar um projeto a partir de um anterior, para que eu aproveite a estrutura de cargas já montada.
+
+*Confirmação*
+- ✅ Dado que a projetista possui um projeto, quando seleciona "Duplicar", então um novo projeto em Rascunho é gravado no banco com as mesmas cargas e novo protocolo.
+- ❌ Dado que o projeto pertence a outro usuário, quando tenta duplicar, então o sistema recusa a operação.
+
+</td>
+</tr>
+</table>
+
+| Endpoint (Spring Boot) | História | Banco |
+| --- | --- | --- |
+| `POST /api/v1/projects` | US02 | grava `Project` |
+| `POST /api/v1/projects/{id}/duplicate` | US13 | lê e grava `Project` |
+| `GET /api/v1/projects` · `GET /api/v1/projects/{id}` | apoio | lê `Project` |
+
+#### Screencasts
+
+| Vídeo | Link |
+| --- | --- |
+| Sistema funcionando | [Assistir no YouTube](https://youtu.be/BYEr2D85BdY) |
+| Explicação do código | _adicionar link do YouTube_ |
+
+#### Issue/bug tracker
+
+_adicionar print da aba Issues do GitHub_
+
+#### Repositórios
+
+| Repositório | Conteúdo |
+| --- | --- |
+| [NeoGuide-Back](https://github.com/NeoGuide-CESAR/NeoGuide-Back) | API Spring Boot (Java 21, PostgreSQL) |
+| [NeoGuide-Front](https://github.com/NeoGuide-CESAR/NeoGuide-Front) | Front-end Angular |
+| [NeoGuide-NeoChat](https://github.com/NeoGuide-CESAR/NeoGuide-NeoChat) | Chatbot Neo (Python/FastAPI) |
+
+---
+
 ## Como Rodar o Projeto
 
-> As instruções de instalação e execução podem ser adicionadas aqui conforme o desenvolvimento da aplicação avançar.
+Pré-requisitos: Docker e Docker Compose; Node.js 18+ para o front-end.
 
-### Entrega 2
+**Back-end (API Spring Boot + PostgreSQL)**
 
-Histórias de usuário, regras de negócio e cenários de validação da solução.
+```bash
+git clone https://github.com/NeoGuide-CESAR/NeoGuide-Back.git
+cd NeoGuide-Back
+docker compose up -d --build
+```
+
+A API sobe em `http://localhost:8080` e o banco em `localhost:5432`. As tabelas são criadas automaticamente pelo Hibernate no primeiro boot. A coleção do Postman com as rotas está em `postman/NeoGuide_API.postman_collection.json`.
+
+**Front-end (Angular)**
+
+```bash
+git clone https://github.com/NeoGuide-CESAR/NeoGuide-Front.git
+cd NeoGuide-Front
+npm install
+npx ng serve
+```
+
+A aplicação abre em `http://localhost:4200`.
 
 ---
 
 ## Time
 
-| Integrante | Função |
-| --- | --- |
-| Guilherme Andradade | Full Stack |
-| Henrique Veloso | Back-end |
-| João Durão | Back-end |
-| Karollyne Barbosa | Front-end |
-| Lisa Sales | Scrum Master |
-| Maria Clara Bello | Product Owner |
-| Rhayssa Barbosa | Front-end |
-| Tarcísio Wanderley | Full Stack |
+| Nome completo | E-mail | Função |
+| --- | --- | --- |
+| Guilherme Andrade | ___@cesar.school | Full Stack |
+| Henrique Veloso | ___@cesar.school | Back-end |
+| João Durão | ___@cesar.school | Back-end |
+| Karollyne Barbosa | ___@cesar.school | Front-end |
+| Lisa Sales | ___@cesar.school | Scrum Master |
+| Maria Clara Bello | ___@cesar.school | Product Owner |
+| Rhayssa Barbosa | ___@cesar.school | Front-end |
+| Tarcísio Wanderley | ___@cesar.school | Full Stack |
 
 ---
 
