@@ -4,44 +4,21 @@
 
 ### Plataforma para cálculo e análise de demanda elétrica
 
-Solução tecnológica para automatizar e padronizar o cálculo de demanda elétrica em projetos de edificações com múltiplas unidades consumidoras.
-
-<br>
-
-[![Histórias de Usuário](https://img.shields.io/badge/HISTÓRIAS_DE_USUÁRIO-00A443?style=for-the-badge)](#histórias-de-usuário)
-[![Tecnologias](https://img.shields.io/badge/TECNOLOGIAS-0DA9FE?style=for-the-badge)](#ferramentas-e-tecnologias-usadas)
-[![Entregas](https://img.shields.io/badge/ENTREGAS-FF9C1A?style=for-the-badge)](#entregas)
-[![Time](https://img.shields.io/badge/TIME-FF9C1A?style=for-the-badge)](#time)
-
-<br>
-
-[![Repositório](https://img.shields.io/badge/ABRIR_REPOSITÓRIO-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NeoGuide-CESAR/projetos3-gp1)
-[![Trello](https://img.shields.io/badge/ABRIR_TRELLO-0052CC?style=for-the-badge&logo=trello&logoColor=white)](https://trello.com/b/kX5TZNAj)
-
-<br><br>
-
-### Protótipos
-
-[![Baixa Fidelidade](https://img.shields.io/badge/PROTÓTIPO_BAIXA_FIDELIDADE-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/hutqSipfit7LWTlcD2XMOu/Baixa-Fidelidade?m=auto&t=ZbPLhVzn64DpTAtI-1)
-
-
-[![Alta Fidelidade](https://img.shields.io/badge/PROTÓTIPO_ALTA_FIDELIDADE-00A443?style=for-the-badge&logo=figma&logoColor=white)](https://probe-grow-35678234.figma.site)
-
-[![Vídeo do Protótipo](https://img.shields.io/badge/VÍDEO_DO_PROTÓTIPO-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/7WzRH7oxblE)
+Solução para automatizar e padronizar o cálculo de demanda elétrica em projetos de edificações com múltiplas unidades consumidoras, conforme a norma DIS-NOR-053 da Neoenergia Pernambuco.
 
 </div>
 
 ---
 
-## Protótipos
+## Sumário
 
-O projeto possui protótipos de baixa e alta fidelidade para apoiar a validação da solução e a evolução da interface.
-
-| Protótipo | Acesso |
-| --- | --- |
-| Baixa fidelidade | [Abrir no Figma](https://www.figma.com/design/hutqSipfit7LWTlcD2XMOu/Baixa-Fidelidade?m=auto&t=ZbPLhVzn64DpTAtI-1) |
-| Alta fidelidade | [Abrir protótipo navegável](https://probe-grow-35678234.figma.site) |
-| Vídeo do protótipo | [Assistir no YouTube](https://youtu.be/7WzRH7oxblE) |
+1. [Descrição do Projeto](#descrição-do-projeto)
+2. [Tecnologias Usadas](#tecnologias-usadas)
+3. [Entregas](#entregas)
+   - [Entrega 01](#entrega-01) · [Entrega 02](#entrega-02) · [Entrega 03](#entrega-03)
+4. [Como Rodar o Projeto](#como-rodar-o-projeto)
+5. [Membros da Equipe](#membros-da-equipe)
+6. [Histórias de Usuário](#histórias-de-usuário)
 
 ---
 
@@ -49,9 +26,15 @@ O projeto possui protótipos de baixa e alta fidelidade para apoiar a validaçã
 
 O **NeoGuide** é uma solução tecnológica desenvolvida para automatizar e padronizar o cálculo de demanda elétrica em projetos de edificações com múltiplas unidades consumidoras, como condomínios residenciais, empreendimentos comerciais e instalações de uso misto.
 
+| Link | Acesso |
+| --- | --- |
+| Quadro do projeto | [Trello](https://trello.com/b/kX5TZNAj) |
+| Protótipo de alta fidelidade | [Abrir protótipo navegável](https://probe-grow-35678234.figma.site) |
+| Histórias de usuário (com BDD) | [Ver seção Histórias de Usuário](#histórias-de-usuário) |
+
 ---
 
-## Ferramentas e Tecnologias Usadas
+## Tecnologias Usadas
 
 | Área | Ferramentas e tecnologias |
 | --- | --- |
@@ -98,7 +81,9 @@ O protótipo de baixa fidelidade contempla, no mínimo, as seguintes histórias:
 
 ### Entrega 02
 
-Primeiras tasks + configuração inicial realizadas: https://youtu.be/oImyBj4sZNs
+| Artefato | Acesso |
+| --- | --- |
+| Screencast (primeiras tasks e configuração inicial) | [Assistir no YouTube](https://youtu.be/oImyBj4sZNs) |
 
 ---
 
@@ -199,7 +184,7 @@ A aplicação abre em `http://localhost:4200`.
 
 ---
 
-## Time
+## Membros da Equipe
 
 | Nome completo | E-mail | Função |
 | --- | --- | --- |
