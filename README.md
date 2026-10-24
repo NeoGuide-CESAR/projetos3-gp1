@@ -100,7 +100,8 @@ O protótipo de baixa fidelidade contempla, no mínimo, as seguintes histórias:
 Como um projetista, eu gostaria de criar um projeto informando os dados de identificação da edificação, para que o cálculo de demanda comece organizado e vinculado à minha conta.
 
 *Confirmação*
-- ✅ Dado que a projetista está autenticada e o CEP informado é de Pernambuco (área da Neoenergia), quando envia título, tensão de fornecimento, município e endereço, então o projeto é gravado no banco com status Rascunho, na etapa 1, com protocolo `PRJ-AAAA-XXXX`.
+- ✅ Dado que a projetista consulta um CEP de Pernambuco, quando a consulta é feita, então o endereço é preenchido e o sistema indica que a área é atendida pela Neoenergia.
+- ✅ Dado que a projetista está autenticada, quando envia título, tensão de fornecimento, município e endereço, então o projeto é gravado no banco com status Rascunho, na etapa 1, com protocolo `PRJ-AAAA-XXXX`.
 - ❌ Dado que falta um campo obrigatório, quando tenta criar, então o projeto não é gravado e o campo pendente é informado.
 
 </td>
@@ -159,13 +160,14 @@ Issues abertas no tracker do GitHub: [ver issues](https://github.com/NeoGuide-CE
 
 ## Como Rodar o Projeto
 
-Pré-requisitos: Docker e Docker Compose; Node.js 18+ para o front-end.
+Pré-requisitos: Docker e Docker Compose; Node.js 18.19+ para o front-end (Angular 18).
 
 **Back-end (API Spring Boot + PostgreSQL)**
 
 ```bash
 git clone https://github.com/NeoGuide-CESAR/NeoGuide-Back.git
 cd NeoGuide-Back
+git checkout develop   # rotas da Entrega 03 (CEP e etapa de áreas comuns)
 docker compose up -d --build
 ```
 
@@ -189,13 +191,14 @@ A aplicação abre em `http://localhost:4200`.
 | Nome completo | E-mail | Função |
 | --- | --- | --- |
 | Guilherme Gomes Andrade | gga2@cesar.school | Full Stack |
-| Henrique Veloso | hmvs@cesar.school | Back-end |
-| João Felipe Durão | jfdlc@cesar.school | Back-end |
+| Henrique Matheus Veloso da Silva | hmvs@cesar.school | Back-end |
+| João Felipe Durão Leite Caldas | jfdlc@cesar.school | Back-end |
 | Karollyne Santos Barbosa | ksb@cesar.school | Front-end |
 | Lisa Sales Penides | lsp2@cesar.school | Scrum Master |
 | Maria Clara Bello Pereira Lopes | mcbpl@cesar.school | Product Owner |
 | Rhayssa Santos Barbosa | rsb6@cesar.school | Front-end |
-| Tarcísio Wanderley | tlwsf@cesar.school | Full Stack |
+| Tarcísio Luiz Wanderley da Silva Filho | tlwsf@cesar.school | Full Stack |
+| Isabelly Ribeiro do Carmo | irc@cesar.school | Integrante da disciplina de POO |
 
 ---
 
