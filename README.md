@@ -115,19 +115,19 @@ Primeiras tasks + configuração inicial realizadas: https://youtu.be/oImyBj4sZN
 Como um projetista, eu gostaria de criar um projeto informando os dados de identificação da edificação, para que o cálculo de demanda comece organizado e vinculado à minha conta.
 
 *Confirmação*
-- ✅ Dado que a projetista está autenticada, quando envia nome, endereço e tipo de edificação, então o projeto é gravado no banco com status Rascunho e protocolo `PRJ-AAAA-XXXX`.
+- ✅ Dado que a projetista está autenticada e o CEP informado é de Pernambuco (área da Neoenergia), quando envia título, tensão de fornecimento, município e endereço, então o projeto é gravado no banco com status Rascunho, na etapa 1, com protocolo `PRJ-AAAA-XXXX`.
 - ❌ Dado que falta um campo obrigatório, quando tenta criar, então o projeto não é gravado e o campo pendente é informado.
 
 </td>
 <td width="50%" valign="top">
 
-**US13 — Duplicar projeto existente**
+**US03 — Wizard: preenchimento guiado por etapas**
 
-Como um projetista que atende empreendimentos padronizados, eu gostaria de criar um projeto a partir de um anterior, para que eu aproveite a estrutura de cargas já montada.
+Como um projetista, eu gostaria de informar os dados da edificação em etapas sequenciais, organizadas por categoria de carga, para que eu preencha apenas o que é relevante ao meu projeto.
 
 *Confirmação*
-- ✅ Dado que a projetista possui um projeto, quando seleciona "Duplicar", então um novo projeto em Rascunho é gravado no banco com as mesmas cargas e novo protocolo.
-- ❌ Dado que o projeto pertence a outro usuário, quando tenta duplicar, então o sistema recusa a operação.
+- ✅ Dado que o projeto foi criado, quando a projetista envia as tipologias de apartamentos (Etapa 2) e as cargas de áreas comuns (Etapa 3), então os dados são gravados no banco, a demanda da etapa é calculada (D_rf e D_s) e o projeto avança de etapa.
+- ❌ Dado que uma tipologia tem área menor ou igual a zero, ou uma carga tem fator de potência fora de 0,01 a 1,00, quando a projetista envia a etapa, então nada é gravado e o erro é informado.
 
 </td>
 </tr>
@@ -135,20 +135,32 @@ Como um projetista que atende empreendimentos padronizados, eu gostaria de criar
 
 | Endpoint (Spring Boot) | História | Banco |
 | --- | --- | --- |
+| `GET /api/v1/cep/{cep}` | US02 | valida o endereço (ViaCEP) |
 | `POST /api/v1/projects` | US02 | grava `Project` |
-| `POST /api/v1/projects/{id}/duplicate` | US13 | lê e grava `Project` |
-| `GET /api/v1/projects` · `GET /api/v1/projects/{id}` | apoio | lê `Project` |
+| `PUT /api/v1/projects/{id}/etapa-residencial` | US03 | grava `ResidentialTypology` e atualiza `Project` |
+| `PUT /api/v1/projects/{id}/etapa-area-comum` | US03 | grava `CommonAreaLoad` e atualiza `Project` |
 
 #### Screencasts
 
 | Vídeo | Link |
 | --- | --- |
-| Sistema funcionando | [Assistir no YouTube](https://youtu.be/BYEr2D85BdY) |
-| Explicação do código | _adicionar link do YouTube_ |
+| Sistema funcionando (requisições no Postman) | [Assistir no YouTube](https://youtu.be/BYEr2D85BdY) |
+| Explicação do código (controllers, services e motores de cálculo) | [Assistir no YouTube](https://youtu.be/BYEr2D85BdY) |
+
+> O mesmo vídeo mostra cada endpoint funcionando e, em seguida, explica o código correspondente.
 
 #### Issue/bug tracker
 
-_adicionar print da aba Issues do GitHub_
+Issues abertas no tracker do GitHub: [ver issues](https://github.com/NeoGuide-CESAR/projetos3-gp1/issues)
+
+| # | Issue |
+| --- | --- |
+| [#2](https://github.com/NeoGuide-CESAR/projetos3-gp1/issues/2) | Login do front é simulado e não chama a API |
+| [#3](https://github.com/NeoGuide-CESAR/projetos3-gp1/issues/3) | Lista de projetos vem de dados mockados |
+| [#4](https://github.com/NeoGuide-CESAR/projetos3-gp1/issues/4) | Consulta de CEP chama o ViaCEP direto em vez da API NeoGuide |
+
+<img width="2824" height="1044" alt="image" src="https://github.com/user-attachments/assets/21928b50-166d-40a3-8018-0e51af389848" />
+
 
 #### Repositórios
 
@@ -191,14 +203,14 @@ A aplicação abre em `http://localhost:4200`.
 
 | Nome completo | E-mail | Função |
 | --- | --- | --- |
-| Guilherme Andrade | ___@cesar.school | Full Stack |
-| Henrique Veloso | ___@cesar.school | Back-end |
-| João Durão | ___@cesar.school | Back-end |
-| Karollyne Barbosa | ___@cesar.school | Front-end |
-| Lisa Sales | ___@cesar.school | Scrum Master |
-| Maria Clara Bello | ___@cesar.school | Product Owner |
-| Rhayssa Barbosa | ___@cesar.school | Front-end |
-| Tarcísio Wanderley | ___@cesar.school | Full Stack |
+| Guilherme Gomes Andrade | gga2@cesar.school | Full Stack |
+| Henrique Veloso | hmvs@cesar.school | Back-end |
+| João Felipe Durão | jfdlc@cesar.school | Back-end |
+| Karollyne Santos Barbosa | ksb@cesar.school | Front-end |
+| Lisa Sales Penides | lsp2@cesar.school | Scrum Master |
+| Maria Clara Bello Pereira Lopes | mcbpl@cesar.school | Product Owner |
+| Rhayssa Santos Barbosa | rsb6@cesar.school | Front-end |
+| Tarcísio Wanderley | tlwsf@cesar.school | Full Stack |
 
 ---
 
