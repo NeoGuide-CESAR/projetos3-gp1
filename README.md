@@ -15,7 +15,7 @@ Solução para automatizar e padronizar o cálculo de demanda elétrica em proje
 1. [Descrição do Projeto](#descrição-do-projeto)
 2. [Tecnologias Usadas](#tecnologias-usadas)
 3. [Entregas](#entregas)
-   - [Entrega 01](#entrega-01) · [Entrega 02](#entrega-02) · [Entrega 03](#entrega-03)
+   - [Entrega 01](#entrega-01) · [Entrega 02](#entrega-02) · [Entrega 03](#entrega-03) · [Entrega 04](#entrega-04)
 4. [Como Rodar o Projeto](#como-rodar-o-projeto)
 5. [Membros da Equipe](#membros-da-equipe)
 6. [Histórias de Usuário](#histórias-de-usuário)
@@ -148,6 +148,66 @@ Issues abertas no tracker do GitHub: [ver issues](https://github.com/NeoGuide-CE
 <img width="2824" height="1044" alt="image" src="https://github.com/user-attachments/assets/21928b50-166d-40a3-8018-0e51af389848" />
 
 
+---
+
+### Entrega 04
+
+#### Histórias implementadas
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**US01 — Home com lista, ordenação e filtro de projetos**
+
+Como um projetista, eu quero ver meus projetos com o status de cada um, podendo ordenar e filtrar a lista, para que eu localize rapidamente o projeto que preciso retomar ou consultar.
+
+*Confirmação*
+- ✅ Dado que a projetista está autenticada, quando abre a Home, então vê só os próprios projetos, lidos do banco, com nome, status e data da última alteração, do mais recente para o mais antigo.
+- ✅ Dado que a lista tem vários projetos, quando ordena por nome ou filtra por status, então a lista é paginada, ordenada e filtrada pelo back-end.
+- ✅ Dado que a projetista seleciona um projeto, quando clica nele, então abre o detalhamento com os dados gravados.
+- ❌ Dado que nenhum projeto atende ao filtro, quando o filtro é aplicado, então a lista mostra que não há resultados e oferece limpar o filtro.
+
+</td>
+<td width="50%" valign="top">
+
+**US09 — Chatbot Neo: dúvidas sobre a norma**
+
+Como um projetista, eu quero tirar dúvidas com a assistente virtual Neo durante o preenchimento, para que eu esclareça pontos da norma sem sair do Wizard nem interpretar o documento sozinho.
+
+*Confirmação*
+- ✅ Dado que a projetista abre uma conversa com a Neo, quando pergunta sobre um item da DIS-NOR-053, então a resposta vem da base documental, cita a seção consultada e a pergunta e a resposta ficam gravadas no banco.
+- ✅ Dado que a conversa foi gravada, quando a projetista reabre o histórico, então as mensagens anteriores são carregadas do banco.
+- ❌ Dado que a pergunta está fora da base documental, quando é enviada, então a Neo informa que não tem informação confiável e não inventa uma resposta.
+
+</td>
+</tr>
+</table>
+
+| Endpoint | História | Banco |
+| --- | --- | --- |
+| `GET /api/v1/projects?status=&search=&page=&size=&sort=` (Spring Boot) | US01 | lê `Project`, só do usuário autenticado |
+| `GET /api/v1/projects/{id}` (Spring Boot) | US01 | lê `Project` e as etapas gravadas |
+| `POST /api/v1/sessions` (NeoChat, FastAPI) | US09 | grava `chat_sessions` |
+| `POST /api/v1/chat` (NeoChat, FastAPI) | US09 | grava pergunta e resposta em `chat_messages`, com as fontes citadas |
+| `GET /api/v1/sessions/{session_id}` (NeoChat, FastAPI) | US09 | lê o histórico em `chat_messages` |
+
+#### Screencasts
+
+| Vídeo | Link |
+| --- | --- |
+| Sistema funcionando (US01 e US09) | [Assistir no YouTube](https://youtu.be/YKz1zVrG_pY) |
+| Explicação do código | [Assistir no YouTube](https://youtu.be/YKz1zVrG_pY) |
+
+> O mesmo vídeo mostra o sistema funcionando e, em seguida, explica o código correspondente.
+
+#### Issue/bug tracker
+
+Issues abertas no tracker do GitHub: [ver issues](https://github.com/NeoGuide-CESAR/projetos3-gp1/issues)
+
+<img width="2824" height="1044" alt="Issue tracker do GitHub" src="https://github.com/user-attachments/assets/21928b50-166d-40a3-8018-0e51af389848" />
+
+
 #### Repositórios
 
 | Repositório | Conteúdo |
@@ -183,6 +243,17 @@ npx ng serve
 ```
 
 A aplicação abre em `http://localhost:4200`.
+
+**Chatbot Neo (NeoChat, Python/FastAPI)**
+
+```bash
+git clone https://github.com/NeoGuide-CESAR/NeoGuide-NeoChat.git
+cd NeoGuide-NeoChat
+cp .env.example .env   # preencha GEMINI_API_KEY
+docker compose up -d
+```
+
+A API do chatbot sobe em `http://localhost:8000` (documentação em `http://localhost:8000/docs`) e o banco pgvector em `localhost:5433`.
 
 ---
 
