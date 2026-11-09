@@ -91,33 +91,10 @@ O protótipo de baixa fidelidade contempla, no mínimo, as seguintes histórias:
 
 #### Histórias implementadas
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
-**US02 — Criar novo projeto**
-
-Como um projetista, eu gostaria de criar um projeto informando os dados de identificação da edificação, para que o cálculo de demanda comece organizado e vinculado à minha conta.
-
-*Confirmação*
-- ✅ Dado que a projetista consulta um CEP de Pernambuco, quando a consulta é feita, então o endereço é preenchido e o sistema indica que a área é atendida pela Neoenergia.
-- ✅ Dado que a projetista está autenticada, quando envia título, tensão de fornecimento, município e endereço, então o projeto é gravado no banco com status Rascunho, na etapa 1, com protocolo `PRJ-AAAA-XXXX`.
-- ❌ Dado que falta um campo obrigatório, quando tenta criar, então o projeto não é gravado e o campo pendente é informado.
-
-</td>
-<td width="50%" valign="top">
-
-**US03 — Wizard: preenchimento guiado por etapas**
-
-Como um projetista, eu gostaria de informar os dados da edificação em etapas sequenciais, organizadas por categoria de carga, para que eu preencha apenas o que é relevante ao meu projeto.
-
-*Confirmação*
-- ✅ Dado que o projeto foi criado, quando a projetista envia as tipologias de apartamentos (Etapa 2) e as cargas de áreas comuns (Etapa 3), então os dados são gravados no banco, a demanda da etapa é calculada (D_rf e D_s) e o projeto avança de etapa.
-- ❌ Dado que uma tipologia tem área menor ou igual a zero, ou uma carga tem fator de potência fora de 0,01 a 1,00, quando a projetista envia a etapa, então nada é gravado e o erro é informado.
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <img src="docs/entrega03/US02.png" alt="Post-it da US02 — Criar novo projeto" width="49%" />
+  <img src="docs/entrega03/US03.png" alt="Post-it da US03 — Wizard: preenchimento guiado por etapas" width="49%" />
+</p>
 
 | Endpoint (Spring Boot) | História | Banco |
 | --- | --- | --- |
@@ -154,35 +131,10 @@ Issues abertas no tracker do GitHub: [ver issues](https://github.com/NeoGuide-CE
 
 #### Histórias implementadas
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
-**US01 — Home com lista, ordenação e filtro de projetos**
-
-Como um projetista, eu quero ver meus projetos com o status de cada um, podendo ordenar e filtrar a lista, para que eu localize rapidamente o projeto que preciso retomar ou consultar.
-
-*Confirmação*
-- ✅ Dado que a projetista está autenticada, quando abre a Home, então vê só os próprios projetos, lidos do banco, com nome, status e data da última alteração, do mais recente para o mais antigo.
-- ✅ Dado que a lista tem vários projetos, quando ordena por nome ou filtra por status, então a lista é paginada, ordenada e filtrada pelo back-end.
-- ✅ Dado que a projetista seleciona um projeto, quando clica nele, então abre o detalhamento com os dados gravados.
-- ❌ Dado que nenhum projeto atende ao filtro, quando o filtro é aplicado, então a lista mostra que não há resultados e oferece limpar o filtro.
-
-</td>
-<td width="50%" valign="top">
-
-**US09 — Chatbot Neo: dúvidas sobre a norma**
-
-Como um projetista, eu quero tirar dúvidas com a assistente virtual Neo durante o preenchimento, para que eu esclareça pontos da norma sem sair do Wizard nem interpretar o documento sozinho.
-
-*Confirmação*
-- ✅ Dado que a projetista abre uma conversa com a Neo, quando pergunta sobre um item da DIS-NOR-053, então a resposta vem da base documental, cita a seção consultada e a pergunta e a resposta ficam gravadas no banco.
-- ✅ Dado que a conversa foi gravada, quando a projetista reabre o histórico, então as mensagens anteriores são carregadas do banco.
-- ❌ Dado que a pergunta está fora da base documental, quando é enviada, então a Neo informa que não tem informação confiável e não inventa uma resposta.
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <img src="docs/entrega04/US01.png" alt="Post-it da US01 — Home com lista, ordenação e filtro de projetos" width="49%" />
+  <img src="docs/entrega04/US09.png" alt="Post-it da US09 — Chatbot Neo: dúvidas sobre a norma" width="49%" />
+</p>
 
 | Endpoint | História | Banco |
 | --- | --- | --- |
