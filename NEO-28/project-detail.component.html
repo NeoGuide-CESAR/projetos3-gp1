@@ -1,0 +1,125 @@
+@if (loading()) {
+  <p class="state" role="status">Carregando projeto…</p>
+} @else if (error() || !project()) {
+  <p class="state" role="alert">Não foi possível carregar o projeto. Tente novamente.</p>
+} @else {
+  @let p = project()!;
+  <main class="page">
+    <nav class="crumbs" aria-label="Você está em">
+      <a routerLink="/projetos">Meus Projetos</a> <span>›</span> <span>{{ p.name }}</span>
+    </nav>
+
+    <header class="head">
+      <div>
+        <h1>{{ p.name }} <span class="badge" [class.badge--draft]="isDraft()">{{ statusLabel() }}</span></h1>
+        <p class="muted">Atualizado em {{ p.updatedAt | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn--outline" (click)="duplicate()" [disabled]="duplicating()">Duplicar</button>
+        <button type="button" class="btn btn--solid" (click)="edit()">Editar</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="col">
+        <section class="card" aria-labelledby="dados">
+          <h2 id="dados">Dados do projeto</h2>
+          <dl class="kv">
+            <dt>Nome</dt><dd>{{ p.name }}</dd>
+            <dt>CEP</dt><dd>{{ p.data.cep }}</dd>
+            <dt>Logradouro completo</dt><dd>{{ p.data.address }}</dd>
+            <dt>Tipo de edificação</dt><dd>{{ p.data.buildingType }}</dd>
+            <dt>Carregamento do VE</dt><dd>{{ p.data.evCharging ? 'Sim' : 'Não' }}</dd>
+            <dt>Bomba de incêndio</dt><dd>{{ p.data.firePump ? 'Sim' : 'Não' }}</dd>
+          </dl>
+        </section>
+
+        <section class="card" aria-labelledby="etapas">
+          <h2 id="etapas">Informações por etapa</h2>
+
+          <div class="step">
+            <h3>2 · Residencial</h3>
+            @if (p.steps.residential; as r) {
+              <table>
+                <thead><tr><th>Grupo</th><th>Unidades</th><th>Metragem de cada</th></tr></thead>
+                <tbody>
+                  @for (g of r.groups; track g.name) {
+                    <tr><td>{{ g.name }}</td><td>{{ g.units }}</td><td>{{ g.area }} m²</td></tr>
+                  }
+                </tbody>
+              </table>
+              <p class="line">Smart studio: <b>{{ r.smartStudio ? 'Sim' : 'Não' }}</b></p>
+            } @else { <p class="na">Não se aplica a este projeto</p> }
+          </div>
+
+          <div class="step">
+            <h3>3 · Área comum</h3>
+            @if (p.steps.commonArea; as groups) {
+              @for (g of groups; track g.label) {
+                <p class="line"><span class="lbl">{{ g.label }}:</span>
+                  @if (g.items.length) {
+                    @for (i of g.items; track i.name; let last = $last) {
+                      {{ i.name }}: <b>{{ i.value }}</b>@if (!last) { · }
+                    }
+                  } @else { <i>Nenhum valor informado</i> }
+                </p>
+              }
+            } @else { <p class="na">Não se aplica a este projeto</p> }
+          </div>
+
+          <div class="step">
+            <h3>4 · Comercial</h3>
+            @if (p.steps.commercial; as c) {
+              @for (s of c.shops; track s.name) {
+                <p class="line">{{ s.name }}: <b>{{ s.area }} m²</b></p>
+              }
+            } @else { <p class="na">Não se aplica a este projeto</p> }
+          </div>
+
+          <div class="step">
+            <h3>5 · Veículo elétrico e bomba de incêndio</h3>
+            @if (p.steps.evAndFire; as e) {
+              <p class="line">Pontos de carregamento:
+                @if (e.chargingPoints !== null) { <b>{{ e.chargingPoints }}</b> } @else { <span class="na">não se aplica a este projeto</span> }
+              </p>
+              <p class="line">Potência da bomba de incêndio:
+                @if (e.firePumpPower !== null) { <b>{{ e.firePumpPower }} kW</b> } @else { <span class="na">não se aplica a este projeto</span> }
+              </p>
+            } @else { <p class="na">Não se aplica a este projeto</p> }
+          </div>
+        </section>
+
+        <button type="button" class="btn btn--outline btn--small" (click)="back()">Voltar</button>
+      </div>
+
+      <aside class="col">
+        @if (isDraft()) {
+          <section class="card card--draft">
+            <h2>Projeto em rascunho</h2>
+            <p class="muted">Conclua o preenchimento para calcular a demanda.</p>
+            <button type="button" class="btn btn--solid btn--block" (click)="edit()">Continuar preenchimento</button>
+          </section>
+        } @else {
+          <section class="card card--demand" aria-labelledby="dem">
+            <h2 id="dem" class="eyebrow">Demanda total</h2>
+            <p class="demand">{{ p.totalDemandKva | number: '1.1-1' }} <span>kVA</span></p>
+            @if (p.calculatedAt) {
+              <p class="muted small">Calculado em {{ p.calculatedAt | date: "dd/MM/yyyy 'às' HH'h'mm" }}</p>
+            }
+            <a class="link" [routerLink]="['/projetos', p.id, 'resultado']">Ver resultado completo →</a>
+          </section>
+        }
+
+        @if (p.submittedAt) {
+          <section class="card" aria-labelledby="and">
+            <h2 id="and">Andamento</h2>
+            <dl class="kv kv--tight">
+              <dt>Enviado em</dt><dd>{{ p.submittedAt | date: 'dd/MM/yyyy' }}</dd>
+              <dt>Próxima etapa</dt><dd>{{ p.nextStep }}</dd>
+            </dl>
+          </section>
+        }
+      </aside>
+    </div>
+  </main>
+}
